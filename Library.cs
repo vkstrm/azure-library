@@ -45,12 +45,20 @@ namespace Library.Functions
 
     public static class Lister 
     {
+        [FunctionName("Lister")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "list")] HttpRequest request,
             [Table(Constants.BOOKS_TABLE)] CloudTable inputTable,
             ILogger log)
         {
-            return new OkObjectResult("");
+            var query = new TableQuery<TableBook>();
+            var result = await inputTable.ExecuteQuerySegmentedAsync(query, null);
+            var list = new System.Collections.Generic.List<Book>();
+            foreach (var row in result) {
+                list.Add(row.ToBook());
+            }
+
+            return new OkObjectResult(list.ToArray());
         }
     }
 }

@@ -1,5 +1,5 @@
 deploy-func name:
-    func azure functionapp publish {{name}}
+    func azure functionapp publish {{name}} --csharp
 
 deploy-inf location='northeurope':
     az deployment sub create --location {{location}} --template-file deploy/main.bicep
