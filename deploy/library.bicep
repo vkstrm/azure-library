@@ -35,7 +35,7 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
   }
   kind: 'functionapp'
   properties: {
-    serverFarmId: servicePlan.name
+    serverFarmId: servicePlan.id
   }
 
   resource functionAppSlotConfigNames 'config@2021-01-15' = {
@@ -71,7 +71,7 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
       type: 'SystemAssigned'
     }
     properties: {
-      serverFarmId: servicePlan.name
+      serverFarmId: servicePlan.id
     }
 
     resource stageLibraryAppSettings 'config@2021-01-15' = {

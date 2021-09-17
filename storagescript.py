@@ -5,9 +5,10 @@ import os
 
 # export STORAGE_KEY=$(az storage account keys list --resource-group <name> --account-name <name> | jq '.[0].value')
 STORAGE_KEY = os.getenv("STORAGE_KEY")
+ACCOUNT_NAME = os.getenv("STORAGE_ACCOUNT")
 BOOKS_TABLE = "books"
 
-table_service = TableService(account_name='stlibrary534ythd2kre4q', account_key=STORAGE_KEY)
+table_service = TableService(account_name=ACCOUNT_NAME, account_key=STORAGE_KEY)
 table_service.create_table(BOOKS_TABLE)
 print("Created table ", BOOKS_TABLE)
 

@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.2.0" />
+    <PackageReference Include="Azure.Identity" Version="1.4.1" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="4.0.2" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.38" />
   </ItemGroup>

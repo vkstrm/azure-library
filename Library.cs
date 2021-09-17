@@ -12,6 +12,7 @@ namespace Library.Functions
     public static class Constants {
         public const string PARTITION = "mainbranch";
         public const string BOOKS_TABLE = "books";
+        public const string BOOK_BLOB = "bookcovers";
     }
 
     public static class Loaner
@@ -94,4 +95,6 @@ public class Book {
     public string AuthorFirstname {get;set;}
     [JsonProperty("available")]
     public int Available {get;set;}
+    [JsonProperty("cover")]
+    public string CoverUrl {get;set;}
 }
