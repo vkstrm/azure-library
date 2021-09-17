@@ -9,3 +9,8 @@ module library 'library.bicep' = {
   scope: rg
   name: 'library'
 }
+
+module site 'site.bicep' = {
+  scope: rg
+  name: 'frontend'
+}
