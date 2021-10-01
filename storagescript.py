@@ -9,8 +9,6 @@ ACCOUNT_NAME = os.getenv("STORAGE_ACCOUNT")
 BOOKS_TABLE = "books"
 
 table_service = TableService(account_name=ACCOUNT_NAME, account_key=STORAGE_KEY)
-table_service.create_table(BOOKS_TABLE)
-print("Created table ", BOOKS_TABLE)
 
 def make_book(row, title, first, last) -> Entity:
     return {
@@ -19,7 +17,7 @@ def make_book(row, title, first, last) -> Entity:
         'Title': title,
         "AuthorLastname": last,
         "AuthorFirstname": first,
-        "Available": 3,
+        "Available": 10,
     }
 
 books = []

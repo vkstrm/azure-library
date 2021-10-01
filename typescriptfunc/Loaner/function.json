@@ -1,0 +1,28 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route": "loan/{isbn}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "table",
+      "direction": "in",
+      "name": "tableBook",
+      "tableName": "books",
+      "rowKey": "{isbn}",
+      "partitionKey": "mainbranch"
+    }
+  ],
+  "scriptFile": "../dist/Loaner/index.js"
+}
