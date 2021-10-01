@@ -1,3 +1,6 @@
+param runtime string
+param extensionversion string
+
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'stlibrary${uniqueString(resourceGroup().id)}'
   location: resourceGroup().location
@@ -55,8 +58,8 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
       AzureWebJobsStorage: storageConnectionString
       WEBSITE_CONTENTAZUREFILECONNECTIONSTRING: storageConnectionString
       WEBSITE_CONTENTSHARE: 'library'
-      FUNCTIONS_EXTENSION_VERSION: '~2'
-      FUNCTIONS_WORKER_RUNTIME: 'dotnet'
+      FUNCTIONS_EXTENSION_VERSION: '~${extensionversion}'
+      FUNCTIONS_WORKER_RUNTIME: runtime
       APPINSIGHTS_INSTRUMENTATIONKEY: insights.properties.InstrumentationKey
       WEBSITE_TIME_ZONE: 'Central Europe Standard Time'
       WEBSITE_ADD_SITENAME_BINDINGS_IN_APPHOST_CONFIG: '1'
@@ -82,8 +85,8 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
         AzureWebJobsStorage: storageConnectionString
         WEBSITE_CONTENTAZUREFILECONNECTIONSTRING: storageConnectionString
         WEBSITE_CONTENTSHARE: 'library'
-        FUNCTIONS_EXTENSION_VERSION: '~2'
-        FUNCTIONS_WORKER_RUNTIME: 'dotnet'
+        FUNCTIONS_EXTENSION_VERSION: '~${extensionversion}'
+        FUNCTIONS_WORKER_RUNTIME: runtime
         APPINSIGHTS_INSTRUMENTATIONKEY: insights.properties.InstrumentationKey
         WEBSITE_TIME_ZONE: 'Central Europe Standard Time'
         WEBSITE_ADD_SITENAME_BINDINGS_IN_APPHOST_CONFIG: '1'
