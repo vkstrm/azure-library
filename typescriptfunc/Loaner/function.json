@@ -7,7 +7,8 @@
       "name": "req",
       "methods": [
         "get"
-      ]
+      ],
+      "route": "loan/{isbn}"
     },
     {
       "type": "http",
@@ -21,7 +22,6 @@
       "tableName": "books",
       "rowKey": "{isbn}",
       "partitionKey": "mainbranch"
-
     }
   ],
   "scriptFile": "../dist/Loaner/index.js"
