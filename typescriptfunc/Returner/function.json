@@ -1,0 +1,28 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route": "return"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "table",
+      "direction": "in",
+      "name": "tableBook",
+      "tableName": "books",
+      "rowKey": "{isbn}",
+      "partitionKey": "mainbranch"
+    }
+  ],
+  "scriptFile": "../dist/Returner/index.js"
+}
