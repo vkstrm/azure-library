@@ -1,13 +1,13 @@
 @description('Function App Runtime')
 @allowed([
-  'dotnet'
+  //'dotnet'
   'node'
 ])
 param runtime string
 
 @description('Function Runtime Version')
 @allowed([
-  '2'
+  //'2'
   '3'
 ])
 param extensionversion string
@@ -19,12 +19,18 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: 'northeurope'
 }
 
+module cosmos 'cosmos.bicep' = {
+  scope: rg
+  name: 'cosmos'
+}
+
 module library 'library.bicep' = {
   scope: rg
   name: 'library'
   params: {
     extensionversion: extensionversion
     runtime: runtime
+    cosmos_connection: cosmos.outputs.cosmos_connectionstring
   }
 }
 

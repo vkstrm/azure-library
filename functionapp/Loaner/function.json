@@ -1,0 +1,47 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route": "loan"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "table",
+      "direction": "in",
+      "name": "tableBook",
+      "tableName": "books",
+      "rowKey": "{isbn}",
+      "partitionKey": "mainbranch"
+    },
+    {
+      "name": "account",
+      "direction": "in",
+      "type": "cosmosDB",
+      "id": "{accountid}",
+      "partitionKey": "{accountid}",
+      "databaseName": "cosmosLibrary",
+      "collectionName": "accounts",
+      "connectionStringSetting": "COSMOS_DB_KEY"
+    },
+    {
+      "name": "registerloan",
+      "direction": "out",
+      "type": "cosmosDB",
+      "createIfNotExist": "false",
+      "databaseName": "cosmosLibrary",
+      "collectionName": "accounts",
+      "connectionStringSetting": "COSMOS_DB_KEY"
+    }
+  ],
+  "scriptFile": "../dist/Loaner/index.js"
+}

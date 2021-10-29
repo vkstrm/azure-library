@@ -1,0 +1,47 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route": "return"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "table",
+      "direction": "in",
+      "name": "tableBook",
+      "tableName": "books",
+      "rowKey": "{isbn}",
+      "partitionKey": "mainbranch"
+    },
+    {
+      "name": "account",
+      "direction": "in",
+      "type": "cosmosDB",
+      "id": "{accountid}",
+      "partitionKey": "{accountid}",
+      "databaseName": "cosmosLibrary",
+      "collectionName": "accounts",
+      "connectionStringSetting": "COSMOS_DB_KEY"
+    },
+    {
+      "name": "registerreturn",
+      "direction": "out",
+      "type": "cosmosDB",
+      "createIfNotExist": "false",
+      "databaseName": "cosmosLibrary",
+      "collectionName": "accounts",
+      "connectionStringSetting": "COSMOS_DB_KEY"
+    }
+  ],
+  "scriptFile": "../dist/Returner/index.js"
+}

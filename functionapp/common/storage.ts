@@ -1,6 +1,13 @@
 import { AzureNamedKeyCredential, TableClient } from "@azure/data-tables";
 import { BlobSASPermissions, BlobSASSignatureValues, ContainerClient, generateBlobSASQueryParameters, StorageSharedKeyCredential } from "@azure/storage-blob";
 
+export interface Account {
+    id: string;
+    accountid: string;
+    name: string;
+    loans: string[];
+}
+
 export interface TableBookEntry {
     PartitionKey: string;
     RowKey: string;

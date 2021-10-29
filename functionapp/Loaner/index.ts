@@ -1,10 +1,25 @@
 import { TableClient } from "@azure/data-tables";
 import { AzureFunction, Context } from "@azure/functions";
 import { ContainerClient } from "@azure/storage-blob";
-import {AzureWebJobsStorage, updateEntity, getBlobSasUri, BookResponse, TableBookEntry } from "../common/storage";
+import { Account, AzureWebJobsStorage, updateEntity, getBlobSasUri, BookResponse, TableBookEntry } from "../common/storage";
 
-const loaner: AzureFunction = async function (context: Context, res: any, tableBookEntry: TableBookEntry): Promise<void> {
-    context.log(context.bindingData);
+const loaner: AzureFunction = async function (context: Context, res: any, tableBookEntry: TableBookEntry, account: Account): Promise<void> {
+    if (!res.body && !res.body.accountid && !res.body.isbn) {
+        context.res = {
+            status: 400,
+            body: 'Wrong body. It should be {"accountid":"string","isbn":"string"}',
+        }
+        return
+    }
+
+    if (!account) {
+        context.res = {
+            status: 404,
+            body: "No account found",
+        }
+        return
+    }
+
     if (!tableBookEntry) {
         context.res = {
             status: 404,
@@ -31,8 +46,18 @@ const loaner: AzureFunction = async function (context: Context, res: any, tableB
 
     await updateEntity(table, tableBookEntry);
 
+    if (!account.loans) {
+        account.loans = [];
+    }
+
+    account.loans.push(tableBookEntry.RowKey);
+    context.bindings.registerloan = account;
+
     context.res = {
         status: 200,
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(new BookResponse(tableBookEntry, sasUri))
     };
 };

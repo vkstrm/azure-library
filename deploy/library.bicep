@@ -1,5 +1,6 @@
 param runtime string
 param extensionversion string
+param cosmos_connection string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: 'stlibrary${uniqueString(resourceGroup().id)}'
@@ -71,6 +72,7 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
       WEBSITE_TIME_ZONE: 'Central Europe Standard Time'
       WEBSITE_ADD_SITENAME_BINDINGS_IN_APPHOST_CONFIG: '1'
       WEBSITE_NODE_DEFAULT_VERSION: '~14'
+      COSMOS_DB_KEY: cosmos_connection
     }
   }
 
@@ -98,6 +100,7 @@ resource libraryApp 'Microsoft.Web/sites@2021-01-15' = {
         WEBSITE_TIME_ZONE: 'Central Europe Standard Time'
         WEBSITE_ADD_SITENAME_BINDINGS_IN_APPHOST_CONFIG: '1'
         WEBSITE_NODE_DEFAULT_VERSION: '~14'
+        COSMOS_DB_KEY: cosmos_connection
       }
     }
   }

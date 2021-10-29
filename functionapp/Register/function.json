@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route":"register"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "name": "accountRegistration",
+      "direction": "out",
+      "type": "cosmosDB",
+      "createIfNotExist": "true",
+      "databaseName": "cosmosLibrary",
+      "collectionName": "accounts",
+      "connectionStringSetting": "COSMOS_DB_KEY"
+    }
+  ],
+  "scriptFile": "../dist/Register/index.js"
+}
