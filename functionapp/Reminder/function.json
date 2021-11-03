@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "reminderMsg",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "queuereminder",
+      "connection": "REMINDER_QUEUE"
+    }
+  ],
+  "scriptFile": "../dist/Reminder/index.js"
+}

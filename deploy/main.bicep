@@ -24,6 +24,7 @@ module cosmos 'cosmos.bicep' = {
   name: 'cosmos'
 }
 
+@description('This module has a library')
 module library 'library.bicep' = {
   scope: rg
   name: 'library'

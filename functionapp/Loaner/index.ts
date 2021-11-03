@@ -60,6 +60,8 @@ const loaner: AzureFunction = async function (context: Context, res: any, tableB
         },
         body: JSON.stringify(new BookResponse(tableBookEntry, sasUri))
     };
+
+    context.bindings.remindermessage = JSON.stringify({"accountid": account.accountid, "isbn": tableBookEntry.RowKey});
 };
 
 export default loaner;

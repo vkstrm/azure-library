@@ -41,6 +41,13 @@
       "databaseName": "cosmosLibrary",
       "collectionName": "accounts",
       "connectionStringSetting": "COSMOS_DB_KEY"
+    },
+    {
+      "name": "remindermessage",
+      "direction": "out",
+      "type": "serviceBus", 
+      "queueName": "queuereminder",
+      "connection": "REMINDER_QUEUE"
     }
   ],
   "scriptFile": "../dist/Loaner/index.js"
